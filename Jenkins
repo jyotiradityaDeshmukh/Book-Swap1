@@ -1,0 +1,34 @@
+pipeline{
+    agent any
+    
+    stages{
+        stage("Workspace Cleanup"){
+            steps{
+                script{
+                    echo "Clean"
+                }
+            }
+        }
+        stage("Clone Repo"){
+            steps{
+                script{
+                    echo "Cloned"
+                }
+            }
+        }
+        stage("Build Docker Image"){
+            steps{
+                script{
+                    echo "Built"
+                }
+            }
+        }
+        stage("Push Docker Image"){
+            steps{
+                script{
+                    echo "Pushed"
+                }
+            }
+        }
+    }
+}
