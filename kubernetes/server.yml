@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: server
-          image: jyotiraditya11/backend-book-app:v1
+          image: jyotiraditya11/book-backend-app:v1
           ports:
             - containerPort: 8003
           env:
