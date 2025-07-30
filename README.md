@@ -6,8 +6,8 @@ This guide explains how to run the Book App locally in your Kubernetes (K8s) env
 
 1. **Clone this repository**
    ```
-   git clone https://github.com/your-username/your-repo.git
-   cd your-repo
+   git clone https://github.com/jyotiradityaDeshmukh/Book-Swap1.git
+   cd Book-Swap1
    ```
 
 2. **Create a namespace for your app**
@@ -26,11 +26,12 @@ This guide explains how to run the Book App locally in your Kubernetes (K8s) env
 
    Open your browser and navigate to:
    ```
-   http://:30080
+   http://<host-ip>:30080
    ```
-   - Replace `` with your host machine's IP address.
+   - Replace `<host-ip>` with your host machine's IP address.
 
 ## 🖼️ Screenshot
+<img width="1913" height="923" alt="Screenshot from 2025-07-30 11-15-39" src="https://github.com/user-attachments/assets/2c2670e0-eb96-4b12-816b-a94ae1d2126d" />
 
 
 
@@ -39,8 +40,3 @@ This guide explains how to run the Book App locally in your Kubernetes (K8s) env
 - Ensure `kubectl` is configured and connected to your local cluster.
 - The manifest files (`client.yml`, `server.yml`) should be present in this repository.
 - The app will be running in the `book-app` namespace.
-
-Feel free to adjust titles, descriptions, or add badges and credits as needed!
-```
-
-Just copy and paste this into your `README.md` file.
