@@ -1,34 +1,63 @@
 pipeline{
     agent any
     
+    environment{
+        CLIENT_IMAGE = 'jyotiraditya11/book-frontend-app'
+        SERVER_IMAGE = 'jyotiraditya11/book-backend-app'
+        GIT_URL = 'https://github.com/jyotiradityaDeshmukh/Book-Swap1.git'
+    }
+    
+    parameters{
+        string(name: 'CLIENT_DOCKER_TAG', defaultValue: '', description: 'Setting Docker image for latest push')
+        string(name: 'SERVER_DOCKER_TAG', defaultValue: '', description: 'Setting Docker image for latest push')
+    }
+    
     stages{
+        stage("Validate Parameters"){
+            steps{
+                script{
+                    if (params.CLIENT_DOCKER_TAG == '' || params.SERVER_DOCKER_TAG == ''){
+                        error("CLIENT_DOCKER_TAG and SERVER_DOCKER_TAG must be provided")
+                    }
+                }
+            }
+        }
         stage("Workspace Cleanup"){
             steps{
                 script{
-                    echo "Clean"
+                    cleanWs()
                 }
             }
         }
         stage("Clone Repo"){
             steps{
-                script{
-                    echo "Cloned"
-                }
+                git url: "${GIT_URL}", branch: 'main'
             }
         }
         stage("Build Docker Image"){
             steps{
                 script{
-                    echo "Built"
+                    sh "docker build -t ${SERVER_IMAGE}:${params.SERVER_DOCKER_TAG} ./server"
+                    sh "docker build -t ${CLIENT_IMAGE}:${params.CLIENT_DOCKER_TAG} ./client"
                 }
             }
         }
         stage("Push Docker Image"){
             steps{
                 script{
-                    echo "Pushed"
+                    sh "docker push ${CLIENT_IMAGE}:${params.CLIENT_DOCKER_TAG}"
+                    sh "docker push ${SERVER_IMAGE}:${params.SERVER_DOCKER_TAG}"
                 }
             }
         }
     }
+    
+    post{
+    success{
+        echo "Successfully built and pushed"
+    }
+    failure{
+        echo "Build failed"
+    }
+}
 }
