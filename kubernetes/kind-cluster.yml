@@ -10,4 +10,3 @@ nodes:
   - containerPort: 30081
     hostPort: 30081
     protocol: TCP
-    listenAddress: "0.0.0.0"
